@@ -6,15 +6,16 @@ export default class GameSquare extends Component {
     super(props); 
 }
 
+
     render() {
         const {onClick, value} = this.props
+        const className = `game-square ${value== '1' && 'btn-secondary' }` 
+        const valueToShow = value == '0' && 'X'
         return (
-            <div>
-                <button className="game-square"
+                <button className={className}
                     onClick={onClick}>
-                    {value}
+                    {valueToShow}
                 </button>
-            </div>
         )
     }
 }
