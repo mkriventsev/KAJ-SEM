@@ -35,8 +35,11 @@ Validita                "Fungující v moderních prohlíčečích
 Semantické značky       "správné použití sémantických       X               1
                         značek (section, article,
                         nav, aside, .)"
+nav section
+aside
 
-Grafika - SVG / Canvas                                                      2
+Grafika - SVG / Canvas                                                      2   
+анимация-хуяция
 
 Média - Audio/Video                                                         1
 
@@ -55,8 +58,12 @@ Pokročilé selektory     použití pokročilých pseudotříd      X           
 Vendor prefixy                                                              1
 
 CSS3 transformace 2D/3D                                                     2
+скейлить иконки/кнопки
 
 CSS3 transitions/animations                                 X               2
+скейлить иконки/кнопки
+менять цвет ховера кнопок
+после выигрыша - анимация-хуяция
 
 Media queries           stránky fungují i na mobilních                      2
                         zařízeních i jiných

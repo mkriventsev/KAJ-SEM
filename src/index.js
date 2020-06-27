@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import HomeScreen from './screens/HomeScreen';
+import GameScreen from './screens/GameScreen';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomeScreen />
+    {/* <HomeScreen /> */}
+    <GameScreen />
   </React.StrictMode>,
   document.getElementById('root')
 );

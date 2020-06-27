@@ -1,0 +1,14 @@
+@import '../../../../styles/colors.scss';
+
+.start-game-button{
+    background-color: $green;
+    width: 100%;
+    &:hover{
+        background-color: lighten($green, 10%);
+    }
+}
+
+.card {
+    min-width: 250px;
+
+}

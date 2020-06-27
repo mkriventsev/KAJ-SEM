@@ -1,5 +1,32 @@
 @import '../../styles/colors.scss';
 
+.container{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .header {
-    color: $green
+    color: $green;
+    text-align: center;
+}
+.menu-list{
+    display: flex;
+    width: 50%;
+    margin: 30px auto;
+    flex-direction: column ;
+    
+    .menu-button{
+        margin: 10px 0;
+        background-color: $blue;
+        font-size: 16px;
+        &:hover{
+            background-color: darken($blue, 20%);
+            
+            // TODO: font-size-adjust for Chrome, Safari etc
+            // for FireFox
+            font-size-adjust: 0.58;
+        }
+    }
 }
