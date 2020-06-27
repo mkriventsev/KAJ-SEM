@@ -12,12 +12,7 @@ export default class GameBoard extends Component {
         };
         console.log(this.state.isFill)
     }
-    renderSquare(i) {
-        return <Square
-            value={this.state.squares[i]}
-            onClick={() => this.handleClick(i)}
-        />;
-    }
+
 
     renderSquares() {
         return this.state.squares.map((line, lineIndex) => <div className='game-row'>
@@ -85,11 +80,4 @@ export default class GameBoard extends Component {
     }
 }
 
-function Square(props) {
-    return (
-        <button className="square"
-            onClick={props.onClick}>
-            {props.value}
-        </button>
-    );
-}
+
