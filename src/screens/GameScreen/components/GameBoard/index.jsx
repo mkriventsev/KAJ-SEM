@@ -5,8 +5,10 @@ import GameSquare from '../GameSquare';
 export default class GameBoard extends Component {
     constructor(props) {
         super(props);
+        const {size} = this.props
+        console.log(size)
         this.state = {
-            squares: [...Array(10)].map(() => Array(10).fill(null)),
+            squares: [...Array(size)].map(() => Array(size).fill(null)),
             isFill: true,
             xIsNext: true,
         };
@@ -68,7 +70,9 @@ export default class GameBoard extends Component {
         console.log(this.state.squares);
         return (
             <div>
+                <div className='board-container'>
                 {this.renderSquares()}
+                </div>
                 <button onClick={() => {
                     this.setState({
                         isFill: !this.state.isFill

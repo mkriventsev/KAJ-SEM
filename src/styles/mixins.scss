@@ -1,0 +1,8 @@
+
+@mixin each($num) {
+    &:nth-child(#{$num}n) {
+        &:not(:last-child) {
+            @content
+        }
+    }
+  }  

@@ -1,11 +1,6 @@
 @import '../../../../styles/colors.scss';
+@import '../../../../styles/mixins.scss';
 
-
-@mixin each($num) {
-    &:nth-child(#{$num}n) {
-      @content
-    }
-  }  
 
 .game-square{
     height: 50px;
@@ -13,9 +8,7 @@
     margin: 0 auto;
     font-size: 35px;
     @include each(5){
-        // margin-bottom: 3px;
-        // margin-right: 2px;
-        border-right: 3px solid green;
+        border-right: 4px solid black;
     }
 
 }
