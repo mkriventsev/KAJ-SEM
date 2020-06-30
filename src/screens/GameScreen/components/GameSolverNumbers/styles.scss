@@ -1,0 +1,15 @@
+.solver-numbers{
+    
+    width: 50px;
+    &.rows{
+        display: flex;
+        height: 51px;
+        width: auto;
+        justify-content: flex-end;
+        align-items: center;
+        border: 2px solid transparent;
+        .number{
+            padding: 0 8px;
+    }
+    }
+}

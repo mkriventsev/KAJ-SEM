@@ -11,10 +11,10 @@ export default class GameSettings extends Component {
     }
 
     renderSizeSelector() {
-        return [10, 15, 20].map(item => (
+        return [10, 15, 20].map((item, index) => (
             <div class="form-check disabled">
                 <label class="form-check-label">
-                    <input onClick={this.onSelectSize} type="radio" class="form-check-input" name="optionsRadios" value={item} />
+                    <input onClick={this.onSelectSize} defaultChecked={index === 0} type="radio" class="form-check-input" name="optionsRadios" value={item} />
                     {item} x {item}
                 </label>
             </div>

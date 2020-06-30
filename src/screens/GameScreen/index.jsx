@@ -27,6 +27,8 @@ export default class GameScreen extends Component {
         this.setState(settings)
     }
 
+    
+
     render() {
         console.log(this.state.levelName, this.state.size, 'd')
         return (
@@ -35,7 +37,7 @@ export default class GameScreen extends Component {
                 <div className='game-screen-container'>
                     <GameSettings onChangeSettings={this.onChangeSettings} />
                     <div className='game-container'>
-        <h1>{this.state.levelName}</h1>
+                    <h1>{this.state.levelName}</h1>
                         <GameBoard size={this.state.size} />
                     </div>
                 </div>

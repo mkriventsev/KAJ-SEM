@@ -1,19 +1,30 @@
 import React, { Component } from 'react'
 import './styles.scss'
 import GameSquare from '../GameSquare';
+import GameSolverNumbers from '../GameSolverNumbers';
 
 export default class GameBoard extends Component {
     constructor(props) {
         super(props);
         const { size } = this.props
-        console.log(size)
         this.state = {
-            squares: [...Array(size)].map(() => Array(size).fill(null)),
+           squares: [...Array(size)].map(() => Array(size).fill(null)),
             isFill: true,
             xIsNext: true,
         };
-        console.log(this.state.isFill)
     }
+
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.size !== state.squares.length) {
+          return {
+            squares: [...Array(props.size)].map(() => Array(props.size).fill(null))
+          };
+        }
+    
+        // Return null if the state hasn't changed
+        return null;
+      }
 
 
     renderSquares() {
@@ -60,29 +71,23 @@ export default class GameBoard extends Component {
         return rows
     }
 
-    checkSolver() {
-        let solver = [
-            //6, 2 2, 1 1 1 2, 1 1 4, 9, 2 1 2, 2 1 2, 4 4, 1 1 1 2, 1 1,
-            [0, 1, 1, 1, 1, 1, 1, 1, 1, 1], //9
-            [0, 1, 0, 0, 1, 1, 1, 1, 0, 0], // 1 4
-            [0, 0, 1, 0, 1, 0, 0, 1, 1, 0], // 1 1 2
-            [1, 0, 0, 1, 1, 0, 0, 1, 0, 0], // 1 2 1
-            [1, 0, 1, 0, 1, 0, 1, 0, 1, 0], //1 1 1 1 1
-            [1, 0, 0, 1, 1, 1, 0, 1, 0, 0], // 1 3 1
-            [1, 0, 0, 1, 1, 0, 0, 1, 0, 0], // 1 2 1
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 10
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 0], //9
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] //0
-        ]
+    solver = [
+        //6, 2 2, 1 1 1 2, 1 1 4, 9, 2 1 2, 2 1 2, 4 4, 1 1 1 2, 1 1,
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1], //9
+        [0, 1, 0, 0, 1, 1, 1, 1, 0, 0], // 1 4
+        [0, 0, 1, 0, 1, 0, 0, 1, 1, 0], // 1 1 2
+        [1, 0, 0, 1, 1, 0, 0, 1, 0, 0], // 1 2 1
+        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0], //1 1 1 1 1
+        [1, 0, 0, 1, 1, 1, 0, 1, 0, 0], // 1 3 1
+        [1, 0, 0, 1, 1, 0, 0, 1, 0, 0], // 1 2 1
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 10
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0], //9
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] //0
+    ]
+
+    checkSolver(solver) {
 
         //transpone Matrix
-        let trSolver = solver[0].map((_, colIndex) => solver.map(row => row[colIndex]));
-        console.log(trSolver);
-
-        const countsForSolver = {
-            rows: this.calculateSolverCounts(solver),
-            columns: this.calculateSolverCounts(trSolver)
-        }
 
         let board = this.state.squares
         if (this.createCertificate(board) == this.createCertificate(solver)) {
@@ -108,17 +113,35 @@ export default class GameBoard extends Component {
 
     render() {
         console.log(this.state.squares);
+        let trSolver = this.solver[0].map((_, colIndex) => this.solver.map(row => row[colIndex]));
+        console.log(trSolver);
+
+
+        const countsForSolver = {
+            rows: this.calculateSolverCounts(this.solver),
+            columns: this.calculateSolverCounts(trSolver)
+        }
+
         return (
-            <div>
-                <div className='board-container'>
-                    {this.renderSquares()}
+            <div className='board-flex-wrapper'>
+                <div className='solver-number-container-rows'>
+                    {countsForSolver.rows.map(rowNumbers => <GameSolverNumbers numbers={rowNumbers} isRows={true} />)}
+                </div>
+                <div>
+                    <div className='solver-number-container-cols'>
+                        {countsForSolver.columns.map(colNumbers => <GameSolverNumbers numbers={colNumbers} />)}
+                    </div>
+                    <div className='board-container'>
+                        
+                        {this.renderSquares()}
+                    </div>
                 </div>
                 <button onClick={() => {
-                    this.setState({
-                        isFill: !this.state.isFill
-                    })
-                    console.log(this.state.isFill)
-                }}>CHANGE</button>
+                        this.setState({
+                            isFill: !this.state.isFill
+                        })
+                        console.log(this.state.isFill)
+                    }}>CHANGE</button>
             </div>
         );
     }
