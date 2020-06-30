@@ -4,11 +4,25 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import HomeScreen from './screens/HomeScreen';
 import GameScreen from './screens/GameScreen';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <HomeScreen /> */}
-    <GameScreen />
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <HomeScreen />
+        </Route>
+        <Route path="/game">
+          <GameScreen />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
