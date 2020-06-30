@@ -9,6 +9,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import SettingsScreen from './screens/SettingsScreen';
 
 
 ReactDOM.render(
@@ -21,6 +22,9 @@ ReactDOM.render(
         <Route path="/game">
           <GameScreen />
         </Route>
+        <Route path="/settings">
+          <SettingsScreen />
+          </Route>
       </Switch>
     </Router>
   </React.StrictMode>,
