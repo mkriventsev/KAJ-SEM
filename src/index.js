@@ -4,12 +4,13 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import HomeScreen from './screens/HomeScreen';
 import GameScreen from './screens/GameScreen';
+import FeedbackScreen from './screens/FeedbackScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import SettingsScreen from './screens/SettingsScreen';
 
 
 ReactDOM.render(
@@ -24,6 +25,9 @@ ReactDOM.render(
         </Route>
         <Route path="/settings">
           <SettingsScreen />
+          </Route>
+        <Route path="/feedback">
+          <FeedbackScreen />
           </Route>
       </Switch>
     </Router>

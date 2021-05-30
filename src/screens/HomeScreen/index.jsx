@@ -23,6 +23,11 @@ export default class HomeScreen extends Component {
                             <button type="button" className="btn btn-primary menu-button">Settings</button>
                         </Link>
                     </div>
+                    <div className='menu-item'>
+                        <Link to="/feedback">
+                            <button type="button" className="btn btn-primary menu-button">Feedback</button>
+                        </Link>
+                    </div>
                 </nav>
 
             </div>

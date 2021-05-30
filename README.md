@@ -35,15 +35,14 @@ Validita                "Fungující v moderních prohlíčečích
 Semantické značky       "správné použití sémantických       X               1
                         značek (section, article,
                         nav, aside, .)"
-nav section
-aside
+nav section aside
 
 Grafika - SVG / Canvas                                                      2   
 анимация-хуяция
 
 Média - Audio/Video                                                         1
 
-Formulářové prvky       Validace, typy, placeholder, autofocus              2
+Formulářové prvky[x]    Validace[x], typy[x], placeholder[x], autofocus[x]  2
 
 Offline aplikace        "využití možnosti fungování                         1
                         stránky bez Internetového připojení
@@ -76,12 +75,12 @@ OOP přístup             prototypová dědičnost,              X              
                         její využití,
                         jmenné prostory
 
-Použití JS frameworku   použití a pochopení frameworku či                   1
+Použití JS frameworku   použití a pochopení frameworku či                   1[x]
 či knihovny             knihovny jQuery, React, Vue ..
 
 Použití pokročilých     využití pokročilých API (File API,  X               3
 JS API                  Geolocation, Drag & Drop,
-                        LocalStorage, Sockety, ...)
+                        LocalStorage[], Sockety, ...)
 
 Funkční historie        posun tlačítky zpět/vpřed                           2
                         prohlížeče - pokud to vyplývá z

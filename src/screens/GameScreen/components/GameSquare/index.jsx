@@ -9,7 +9,7 @@ export default class GameSquare extends Component {
 
     render() {
         const {onClick, value} = this.props
-        const className = `game-square ${value== '1' && 'btn-secondary' }` 
+        const className = `game-square ${value== '1' ? 'btn-secondary' : '' }` 
         const valueToShow = value == '0' && 'X'
         return (
                 <button className={className}
