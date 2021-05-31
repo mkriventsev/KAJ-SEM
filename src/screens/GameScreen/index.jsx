@@ -3,6 +3,7 @@ import "./styles.scss";
 import Navigation from "../../components/Navigation";
 import GameSettings from "./components/GameSettings";
 import GameBoard from "./components/GameBoard";
+import { FinishedGameModal } from "./components/FinishedGameModal";
 
 export default class GameScreen extends Component {
   constructor(props) {
@@ -15,8 +16,9 @@ export default class GameScreen extends Component {
     };
   }
 
-  onChangeLevel = (levelName) => {
-    this.setState({ ...this.state, levelName });
+  onChangeNextLevel = () => {
+    this.setState({ ...this.state, level: this.state.level + 1, levelName: `Level ${this.state.level + 1}` });
+    this.forceUpdate()
   };
 
   onChangeSize = (size) => {
@@ -28,8 +30,12 @@ export default class GameScreen extends Component {
     this.setState({displayBoardSettings:false})
   };
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.level !== this.state.level
+  // }
+
   render() {
-    console.log(this.state.levelName, this.state.size);
+    console.log(this.state.level, this.state.size);
     return (
       <div>
         <Navigation />
@@ -40,7 +46,7 @@ export default class GameScreen extends Component {
             ) : (
               <div>
                 <h1>{this.state.levelName}</h1>
-                <GameBoard size={this.state.size} level ={this.state.level}/>
+                <GameBoard onChangeNextLevel={this.onChangeNextLevel} size={this.state.size} level ={this.state.level}/>
               </div>
             )}
           </div>

@@ -3,6 +3,7 @@ import "./styles.scss";
 import GameSquare from "../GameSquare";
 import GameSolverNumbers from "../GameSolverNumbers";
 import {solver} from '../../../../data/solvers'
+import { FinishedGameModal } from "../FinishedGameModal";
 
 export default class GameBoard extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class GameBoard extends Component {
       isFill: true,
       xIsNext: true,
       gameFinished: false,
+      isModalOpen: false
     };
   }
 
@@ -43,6 +45,7 @@ export default class GameBoard extends Component {
       </div>
     ));
   }
+
   handleClick(row, col) {
     const squares = this.state.squares.slice();
     if (!this.state.gameFinished) {
@@ -89,7 +92,7 @@ export default class GameBoard extends Component {
     const boardCertificate = this.createCertificate(board);
     if (boardCertificate === this.solverCertificate) {
       console.log("KONEC, CHVATIT IGRAT");
-      this.setState({ gameFinished: true });
+      this.setState({ gameFinished: true, isModalOpen: true });
     }
   }
 
@@ -107,8 +110,12 @@ export default class GameBoard extends Component {
     return certificate;
   }
 
+  onCloseModal = () => {
+    this.setState({ isModalOpen: false });
+  }
+
   render() {
-    console.log("render");
+    console.log(this.selectedSolver, "render");
     console.log(this.state.squares);
     let trSolver = this.selectedSolver[0].map((_, colIndex) =>
       this.selectedSolver.map((row) => row[colIndex])
@@ -121,7 +128,11 @@ export default class GameBoard extends Component {
     };
 
     return (
+      <div>
+        <FinishedGameModal onChangeLevel={this.props.onChangeNextLevel} onCloseModal={this.onCloseModal} isOpen={this.state.isModalOpen} />
+
       <div className="board-flex-wrapper">
+        
         <div className="solver-number-container-rows">
           {countsForSolver.rows.map((rowNumbers, index) => (
             <GameSolverNumbers
@@ -149,6 +160,7 @@ export default class GameBoard extends Component {
         >
           CHANGE
         </button>
+      </div>
       </div>
     );
   }
