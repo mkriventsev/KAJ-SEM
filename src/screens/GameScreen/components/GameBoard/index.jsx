@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import "./styles.scss";
 import GameSquare from "../GameSquare";
 import GameSolverNumbers from "../GameSolverNumbers";
-import {solver} from '../../../../data/solvers'
+import { solver } from "../../../../data/solvers";
 import { FinishedGameModal } from "../FinishedGameModal";
+import ButtonsLine from "../ButtonsLine";
+import Clock from "../../../../components/Clock";
 
 export default class GameBoard extends Component {
   constructor(props) {
@@ -11,14 +13,15 @@ export default class GameBoard extends Component {
     const { size } = this.props;
     this.state = {
       squares: [...Array(size)].map(() => Array(size).fill(null)),
-      isFill: true,
+      fillModeOn: true,
       xIsNext: true,
       gameFinished: false,
-      isModalOpen: false
+      isModalOpen: false,
+      resetTime: false,
     };
   }
 
-  selectedSolver = solver[`s${this.props.size}`][`l${this.props.level}`]
+  selectedSolver = solver[`s${this.props.size}`][`l${this.props.level}`];
   solverCertificate = this.createCertificate(this.selectedSolver);
 
   static getDerivedStateFromProps(props, state) {
@@ -50,12 +53,12 @@ export default class GameBoard extends Component {
     const squares = this.state.squares.slice();
     if (!this.state.gameFinished) {
       if (
-        (squares[row][col] == "1" && this.state.isFill) ||
-        (squares[row][col] == "0" && !this.state.isFill)
+        (squares[row][col] == "1" && this.state.fillModeOn) ||
+        (squares[row][col] == "0" && !this.state.fillModeOn)
       ) {
         squares[row][col] = null;
       } else {
-        squares[row][col] = this.state.isFill ? "1" : "0";
+        squares[row][col] = this.state.fillModeOn ? "1" : "0";
       }
       this.setState({
         squares: squares,
@@ -112,7 +115,11 @@ export default class GameBoard extends Component {
 
   onCloseModal = () => {
     this.setState({ isModalOpen: false });
-  }
+  };
+
+  resetBoard = () => {
+    return this.state.board;
+  };
 
   render() {
     console.log(this.selectedSolver, "render");
@@ -129,38 +136,51 @@ export default class GameBoard extends Component {
 
     return (
       <div>
-        <FinishedGameModal onChangeLevel={this.props.onChangeNextLevel} onCloseModal={this.onCloseModal} isOpen={this.state.isModalOpen} />
-
-      <div className="board-flex-wrapper">
-        
-        <div className="solver-number-container-rows">
-          {countsForSolver.rows.map((rowNumbers, index) => (
-            <GameSolverNumbers
-              key={`row-${index}`}
-              numbers={rowNumbers}
-              isRows={true}
-            />
-          ))}
-        </div>
-        <div>
-          <div className="solver-number-container-cols">
-            {countsForSolver.columns.map((colNumbers, index) => (
-              <GameSolverNumbers key={`col-${index}`} numbers={colNumbers} />
+        <FinishedGameModal
+          onChangeLevel={this.props.onChangeNextLevel}
+          onCloseModal={this.onCloseModal}
+          isOpen={this.state.isModalOpen}
+        />
+        <Clock
+          onStartOver={() => {this.setState({resetTime:false})}}
+          resetTime={this.state.resetTime}
+        />
+        <div className="board-flex-wrapper">
+          <div className="solver-number-container-rows">
+            {countsForSolver.rows.map((rowNumbers, index) => (
+              <GameSolverNumbers
+                key={`row-${index}`}
+                numbers={rowNumbers}
+                isRows={true}
+              />
             ))}
           </div>
-          <div className="board-container">{this.renderSquares()}</div>
+          <div>
+            <div className="solver-number-container-cols">
+              {countsForSolver.columns.map((colNumbers, index) => (
+                <GameSolverNumbers key={`col-${index}`} numbers={colNumbers} />
+              ))}
+            </div>
+            <div className="board-container">{this.renderSquares()}</div>
+          </div>
         </div>
-        <button
-          onClick={() => {
+        <ButtonsLine
+          onStartOver={() => {
+            const { size } = this.props;
+            // this.forceUpdate();
             this.setState({
-              isFill: !this.state.isFill,
+              ...this.state,
+              squares: [...Array(size)].map(() => Array(size).fill(null)),
+              resetTime: true 
             });
-            console.log(this.state.isFill);
           }}
-        >
-          CHANGE
-        </button>
-      </div>
+          onBackToSelectLevel={this.props.onBackToSelectLevel}
+          onChangeMode={() => {
+            this.setState({
+              fillModeOn: !this.state.fillModeOn,
+            });
+          }}
+        />
       </div>
     );
   }

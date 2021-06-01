@@ -17,8 +17,12 @@ export default class GameScreen extends Component {
   }
 
   onChangeNextLevel = () => {
-    this.setState({ ...this.state, level: this.state.level + 1, levelName: `Level ${this.state.level + 1}` });
-    this.forceUpdate()
+    this.setState({
+      ...this.state,
+      level: this.state.level + 1,
+      levelName: `Level ${this.state.level + 1}`,
+    });
+    this.forceUpdate();
   };
 
   onChangeSize = (size) => {
@@ -27,7 +31,14 @@ export default class GameScreen extends Component {
 
   onChangeSettings = (settings) => {
     this.setState(settings);
-    this.setState({displayBoardSettings:false})
+    this.setState({ displayBoardSettings: false });
+  };
+
+  onBackToSelectLevel = () => {
+    this.setState({
+      ...this.state,
+      displayBoardSettings: true,
+    });
   };
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -46,7 +57,12 @@ export default class GameScreen extends Component {
             ) : (
               <div>
                 <h1>{this.state.levelName}</h1>
-                <GameBoard onChangeNextLevel={this.onChangeNextLevel} size={this.state.size} level ={this.state.level}/>
+                <GameBoard
+                  onBackToSelectLevel={this.onBackToSelectLevel}
+                  onChangeNextLevel={this.onChangeNextLevel}
+                  size={this.state.size}
+                  level={this.state.level}
+                />
               </div>
             )}
           </div>

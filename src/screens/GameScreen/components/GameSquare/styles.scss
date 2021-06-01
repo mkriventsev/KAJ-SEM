@@ -3,10 +3,10 @@
 
 
 .game-square{
-    height: 50px;
-    width: 50px;
-    margin: 0 auto;
-    font-size: 35px;
+    height: 35px;
+    width: 35px;
+    margin: 0 0;
+    font-size: 24px;
     @include each(5){
         border-right: 4px solid black;
     }
