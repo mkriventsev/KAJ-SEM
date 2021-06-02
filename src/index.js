@@ -11,12 +11,14 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import { initLocalStorage } from "./utils/init";
 
-
+initLocalStorage()
 ReactDOM.render(
   // <React.StrictMode>
     <Router>
       <Switch>
+        
         <Route exact path="/">
           <HomeScreen />
         </Route>
@@ -28,7 +30,7 @@ ReactDOM.render(
           </Route>
         <Route path="/feedback">
           <FeedbackScreen />
-          </Route>
+        </Route>
       </Switch>
     </Router>,
   // </React.StrictMode>,

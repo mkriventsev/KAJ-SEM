@@ -6,25 +6,48 @@ import { solver } from "../../../../data/solvers";
 import { FinishedGameModal } from "../FinishedGameModal";
 import ButtonsLine from "../ButtonsLine";
 import Clock from "../../../../components/Clock";
+import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
 
 export default class GameBoard extends Component {
   constructor(props) {
     super(props);
     const { size } = this.props;
-    const { level } = this.props;
     this.state = {
       squares: [...Array(size)].map(() => Array(size).fill(null)),
       fillModeOn: true,
-      xIsNext: true,
       gameFinished: false,
       isModalOpen: false,
       resetTime: false,
       solveTime: 0,
     };
+    this.initBoard();
   }
+  selectedSolver = null;
+  solverCertificate = null;
+  countsForSolver = null;
 
-  selectedSolver = solver[`s${this.props.size}`][`l${this.props.level}`];
-  solverCertificate = this.createCertificate(this.selectedSolver);
+  initBoard = () => {
+    console.log("init Board");
+    this.selectedSolver = solver[`s${this.props.size}`][`l${this.props.level}`];
+    this.solverCertificate = this.createCertificate(this.selectedSolver);
+    let trSolver = this.selectedSolver[0].map((_, colIndex) =>
+      this.selectedSolver.map((row) => row[colIndex])
+    );
+
+    this.countsForSolver = {
+      rows: this.calculateSolverCounts(this.selectedSolver),
+      columns: this.calculateSolverCounts(trSolver),
+    };
+
+    this.setState({
+      squares: [...Array(this.props.size)].map(() =>
+        Array(this.props.size).fill(null)
+      ),
+      resetTime: true,
+      gameFinished: false,
+    });
+    console.log("nazvanie" + this.selectedSolver);
+  };
 
   static getDerivedStateFromProps(props, state) {
     if (props.size !== state.squares.length) {
@@ -38,9 +61,7 @@ export default class GameBoard extends Component {
   }
 
   saveSolveTime = (time) => {
-    // #PROBLEMA gameFinished меняется на фолс и я могу кликать на поле после модального окна
     this.setState({ solveTime: time });
-    // localStorage.setItem(this.props.level,time)
     let levelstat = JSON.parse(localStorage.getItem("levelstat"));
     if (levelstat[`s${this.props.size}`][`l${this.props.level}`]) {
       levelstat[`s${this.props.size}`][`l${this.props.level}`].push(time);
@@ -58,7 +79,8 @@ export default class GameBoard extends Component {
         {line.map((_, index) => (
           <GameSquare
             key={index}
-            onClick={() => this.handleClick(lineIndex, index)}
+            gameFinished={this.state.gameFinished}
+            onClick={() => {this.handleClick(lineIndex, index)}}
             value={this.state.squares[lineIndex][index]}
           />
         ))}
@@ -139,26 +161,28 @@ export default class GameBoard extends Component {
     return this.state.board;
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps, this.props, "hhhh");
+    if (prevProps.level != this.props.level) {
+      this.initBoard();
+    }
+  }
   render() {
-    console.log(this.selectedSolver, "render");
-    console.log(this.state.squares);
-    let trSolver = this.selectedSolver[0].map((_, colIndex) =>
-      this.selectedSolver.map((row) => row[colIndex])
-    );
-    console.log(trSolver);
-
-    const countsForSolver = {
-      rows: this.calculateSolverCounts(this.selectedSolver),
-      columns: this.calculateSolverCounts(trSolver),
-    };
+    console.log(this.selectedSolver, "render Game Board");
 
     return (
       <div>
         <FinishedGameModal
-          onChangeLevel={this.props.onChangeNextLevel}
+          onChangeLevel={() => {
+            this.props.onChangeNextLevel();
+            // this.initBoard();
+          }}
           onCloseModal={this.onCloseModal}
           isOpen={this.state.isModalOpen}
           solveTime={this.state.solveTime}
+          isLastLevel = {this.props.level === Object.keys(solver[`s${this.props.size}`]).length}
+          onBackToSelectLevel={this.props.onBackToSelectLevel}
+
         />
         <Clock
           onStartOver={() => {
@@ -170,7 +194,7 @@ export default class GameBoard extends Component {
         />
         <div className="board-flex-wrapper">
           <div className="solver-number-container-rows">
-            {countsForSolver.rows.map((rowNumbers, index) => (
+            {this.countsForSolver.rows.map((rowNumbers, index) => (
               <GameSolverNumbers
                 key={`row-${index}`}
                 numbers={rowNumbers}
@@ -180,7 +204,7 @@ export default class GameBoard extends Component {
           </div>
           <div>
             <div className="solver-number-container-cols">
-              {countsForSolver.columns.map((colNumbers, index) => (
+              {this.countsForSolver.columns.map((colNumbers, index) => (
                 <GameSolverNumbers key={`col-${index}`} numbers={colNumbers} />
               ))}
             </div>
@@ -198,6 +222,7 @@ export default class GameBoard extends Component {
             });
           }}
           onBackToSelectLevel={this.props.onBackToSelectLevel}
+          
           onChangeMode={() => {
             this.setState({
               fillModeOn: !this.state.fillModeOn,

@@ -10,5 +10,6 @@
     @include each(5){
         border-right: 4px solid black;
     }
-
+    &:disabled{
+    }
 }
