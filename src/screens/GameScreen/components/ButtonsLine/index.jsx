@@ -10,6 +10,7 @@ export default class ButtonsLine extends Component {
         <button onClick={this.props.onStartOver}>START OVER</button>
         <button onClick={this.props.onChangeMode}>CHANGE MODE</button>
         <button onClick = {this.props.onBackToSelectLevel} >SELECT LEVEL</button>
+        <button onClick = {this.props.onBackToSelectLevel} >SHOW CORRECT LINES</button>
       </div>
     );
   }

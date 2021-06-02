@@ -44,8 +44,18 @@ export default class GameScreen extends Component {
   // shouldComponentUpdate(nextProps, nextState) {
   //   return nextState.level !== this.state.level
   // }
+  initLocalStorage = () => {
+    if (localStorage.getItem("levelstat") === null) {
+      const levelstat = {s10: {}, s15: {}, s20: {}};
+      localStorage.setItem("last_init", Date.now());
+    }
+    if (localStorage.getItem("meta") === null) {
+      localStorage.setItem("last_init", Date.now());
+    }
+  };
 
   render() {
+    this.initLocalStorage()
     console.log(this.state.level, this.state.size);
     return (
       <div>

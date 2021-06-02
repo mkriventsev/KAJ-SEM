@@ -14,7 +14,7 @@ import {
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -30,12 +30,15 @@ ReactDOM.render(
           <FeedbackScreen />
           </Route>
       </Switch>
-    </Router>
-  </React.StrictMode>,
+    </Router>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();
+
+// https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/README.md
+// https://blog.bitsrc.io/using-service-workers-with-react-27a4c5e2d1a9

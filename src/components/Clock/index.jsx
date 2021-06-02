@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import ButtonsLine from "../../screens/GameScreen/components/ButtonsLine";
+import { formatSecondsToHumanTime } from "../../utils/timeformatter";
 
 export default class Clock extends Component {
   constructor(props) {
     super(props);
     this.state = {
       running: false,
-      currentTimeMs: 0,
-      currentTimeSec: 0,
-      currentTimeMin: 0,
+      isTimeSaved: false,
+      currentTime: 0,
     };
   }
 
@@ -17,11 +17,11 @@ export default class Clock extends Component {
   }
 
   start = () => {
-    // this.setState({
-    //   ...this.state,
-    //   running: true,
-    // });
-    this.clock = setInterval(() => this.pace(), 10);
+    this.setState({
+      ...this.state,
+      running: true,
+    });
+    this.clock = setInterval(() => this.pace(), 1000);
   };
 
   componentWillUnmount() {
@@ -37,59 +37,41 @@ export default class Clock extends Component {
   };
 
   pace = () => {
-    this.setState({ currentTimeMs: this.state.currentTimeMs + 10 });
-    if (this.state.currentTimeMs >= 1000) {
-      this.setState({ currentTimeSec: this.state.currentTimeSec + 1 });
-      this.setState({ currentTimeMs: 0 });
-    }
-    if (this.state.currentTimeSec >= 60) {
-      this.setState({ currentTimeMin: this.state.currentTimeMin + 1 });
-      this.setState({ currentTimeSec: 0 });
-    }
+    this.setState({ currentTime: this.state.currentTime + 1 });
   };
 
   reset = () => {
     this.setState({
-      currentTimeMs: 0,
-      currentTimeSec: 0,
-      currentTimeMin: 0,
+      currentTime: 0,
     });
   };
 
-  formatTime = (val, ...rest) => {
-    let value = val.toString();
-    if (value.length < 2) {
-      value = "0" + value;
+  componentDidUpdate() {
+    if (this.props.gameFinished && !this.state.isTimeSaved) {
+      this.props.saveSolveTime(this.state.currentTime);
+      this.stop();
+      this.setState({isTimeSaved: true });
     }
-    if (rest[0] === "ms" && value.length < 3) {
-      value = "0" + value;
+    if (this.props.resetTime) {
+      console.log("da");
+      this.props.onStartOver();
+      
+      if (this.state.isTimeSaved){
+        this.start()
+      }
+      this.reset();
+      this.setState({isTimeSaved: false });
     }
-    return value;
-  };
-
-  // componentWillReceiveProps(props) {
-  
-  // }
+  }
 
   render() {
-    if (this.props.resetTime){
-      console.log('da')
-      this.props.onStartOver()
-      this.reset()
-    }
     return (
       <div className="clock">
-        <span>
-          {/* #TODO hours */}
-
-          {this.formatTime(this.state.currentTimeMin)}:
-          {this.formatTime(this.state.currentTimeSec)}
-        </span>
+        <span>{formatSecondsToHumanTime(this.state.currentTime)}</span>
       </div>
     );
   }
 }
 
-// #TODO calculate
 // https://reactjs.org/docs/state-and-lifecycle.html
 // https://stackoverflow.com/questions/39041710/react-js-change-child-components-state-from-parent-component

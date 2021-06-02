@@ -11,6 +11,7 @@ export default class GameBoard extends Component {
   constructor(props) {
     super(props);
     const { size } = this.props;
+    const { level } = this.props;
     this.state = {
       squares: [...Array(size)].map(() => Array(size).fill(null)),
       fillModeOn: true,
@@ -18,6 +19,7 @@ export default class GameBoard extends Component {
       gameFinished: false,
       isModalOpen: false,
       resetTime: false,
+      solveTime: 0,
     };
   }
 
@@ -34,6 +36,21 @@ export default class GameBoard extends Component {
     // Return null if the state hasn't changed
     return null;
   }
+
+  saveSolveTime = (time) => {
+    // #PROBLEMA gameFinished меняется на фолс и я могу кликать на поле после модального окна
+    this.setState({ solveTime: time });
+    // localStorage.setItem(this.props.level,time)
+    let levelstat = JSON.parse(localStorage.getItem("levelstat"));
+    if (levelstat[`s${this.props.size}`][`l${this.props.level}`]) {
+      levelstat[`s${this.props.size}`][`l${this.props.level}`].push(time);
+    } else {
+      levelstat[`s${this.props.size}`][`l${this.props.level}`] = [time];
+    }
+
+    localStorage.setItem("levelstat", JSON.stringify(levelstat));
+    // users = JSON.parse(localStorage.getItem("users") || "[]");
+  };
 
   renderSquares() {
     return this.state.squares.map((line, lineIndex) => (
@@ -96,6 +113,7 @@ export default class GameBoard extends Component {
     if (boardCertificate === this.solverCertificate) {
       console.log("KONEC, CHVATIT IGRAT");
       this.setState({ gameFinished: true, isModalOpen: true });
+      localStorage.setItem("myData", "data");
     }
   }
 
@@ -140,10 +158,15 @@ export default class GameBoard extends Component {
           onChangeLevel={this.props.onChangeNextLevel}
           onCloseModal={this.onCloseModal}
           isOpen={this.state.isModalOpen}
+          solveTime={this.state.solveTime}
         />
         <Clock
-          onStartOver={() => {this.setState({resetTime:false})}}
+          onStartOver={() => {
+            this.setState({ resetTime: false, gameFinished: false });
+          }}
           resetTime={this.state.resetTime}
+          gameFinished={this.state.gameFinished}
+          saveSolveTime={this.saveSolveTime}
         />
         <div className="board-flex-wrapper">
           <div className="solver-number-container-rows">
@@ -171,7 +194,7 @@ export default class GameBoard extends Component {
             this.setState({
               ...this.state,
               squares: [...Array(size)].map(() => Array(size).fill(null)),
-              resetTime: true 
+              resetTime: true,
             });
           }}
           onBackToSelectLevel={this.props.onBackToSelectLevel}
