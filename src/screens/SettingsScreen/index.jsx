@@ -10,34 +10,47 @@ export default class SettingsScreen extends Component {
       settings: JSON.parse(localStorage.getItem("settings")),
     };
   }
-  // localStorage.setItem("levelstat", JSON.stringify(levelstat));
-  // users = JSON.parse(localStorage.getItem("users") || "[]");
-
-  saveSettingsToStorage = () => {};
-
+  
   setMusicVolume = (e) => {
     this.setState({
       settings: {
         ...this.state.settings,
-        music: { ...this.state.settings.music, level: e.target.value },
+        music: { ...this.state.settings.music, volume: e.target.value },
       },
+    }, ()  =>  {
+      localStorage.setItem("settings", JSON.stringify(this.state.settings));
     });
-    localStorage.setItem("settings", JSON.stringify(this.state.settings));
   };
   setSoundVolume = (e) => {
     this.setState({
       settings: {
         ...this.state.settings,
-        sound: { ...this.state.settings.sound, level: e.target.value },
+        sound: { ...this.state.settings.sound, volume: e.target.value },
       },
+    }, ()  =>  {
+      localStorage.setItem("settings", JSON.stringify(this.state.settings));
     });
-    localStorage.setItem("settings", JSON.stringify(this.state.settings));
   };
-  switchMusic(e) {
-    console.log(e.target.checked);
-  }
-  switchEffects(e) {
-    console.log(e.target.checked);
+
+  switchMusic = (e) => {
+    this.setState({
+      settings: {
+        ...this.state.settings,
+        music: { ...this.state.settings.music, enabled: e.target.checked },
+      },
+    }, ()  =>  {
+      localStorage.setItem("settings", JSON.stringify(this.state.settings));
+    });
+  };
+  switchEffects = (e) => {
+    this.setState({
+      settings: {
+        ...this.state.settings,
+        sound: { ...this.state.settings.sound, enabled: e.target.checked },
+      },
+    }, ()  =>  {
+      localStorage.setItem("settings", JSON.stringify(this.state.settings));
+    });
   }
   render() {
     return (
@@ -46,54 +59,55 @@ export default class SettingsScreen extends Component {
         <div className="settings-container">
           <h1>Game Settings</h1>
           <section>
-            <fieldset class="custom-control custom-switch">
+            <fieldset className="custom-control custom-switch">
               <input
                 type="checkbox"
-                class="custom-control-input"
+                className="custom-control-input"
                 id="musicEffects"
                 onChange={this.switchMusic}
-                value={this.state.settings.music.state}
+                defaultChecked={this.state.settings.music.enabled}
               />
-              <label class="custom-control-label" for="musicEffects">
+              <label className="custom-control-label" htmlFor="musicEffects">
                 Music
               </label>
             </fieldset>
-            <fieldset class="form-group">
+            
+            <fieldset className="form-group">
               <label>Music volume</label>
               <input
-                type="range"
-                class="custom-range"
-                onChange={this.setMusicVolume}
-                value={this.state.settings.music.level}
+                type="range" disabled={!this.state.settings.music.enabled}
+                className="custom-range"
+                onClick={this.setMusicVolume}
+                defaultValue={this.state.settings.music.volume}
               />
             </fieldset>
-            <fieldset class="custom-control custom-switch">
+            <fieldset className="custom-control custom-switch">
               <input
                 type="checkbox"
-                class="custom-control-input"
+                className="custom-control-input"
                 id="soundEffects"
                 onChange={this.switchEffects}
-                value={this.state.settings.sound.state}
+                defaultChecked={this.state.settings.sound.enabled}
               />
-              <label class="custom-control-label" for="soundEffects">
+              <label className="custom-control-label" htmlFor="soundEffects">
                 Sound effects
               </label>
             </fieldset>
-            <fieldset class="form-group">
+            <fieldset className="form-group">
               <label>Sound effects volume</label>
               <input
-                type="range"
-                class="custom-range"
+                type="range"  disabled={!this.state.settings.sound.enabled}
+                className="custom-range"
                 onChange={this.setSoundVolume}
-                value={this.state.settings.sound.level}
+                defaultValue={this.state.settings.sound.volume}
               />
             </fieldset>
           </section>
           <section>
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Game Instruction</h4>
-                <p class="card-text">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">Game Instruction</h4>
+                <p className="card-text">
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </p>
