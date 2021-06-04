@@ -5,6 +5,12 @@ import GameSettings from "./components/GameSettings";
 import GameBoard from "./components/GameBoard";
 import { FinishedGameModal } from "./components/FinishedGameModal";
 import { initLocalStorage } from "../../utils/init";
+import africamusicfile from '../../audio/music/africa.mp3'; 
+import asiamusicfile from '../../audio/music/asia.mp3'; 
+import japanmusicfile from '../../audio/music/japan.mp3'; 
+import forestmusicfile from '../../audio/music/forest.mp3'; 
+import watermusicfile from '../../audio/music/water.mp3'; 
+
 
 export default class GameScreen extends Component {
   constructor(props) {
@@ -14,9 +20,21 @@ export default class GameScreen extends Component {
       levelName: "Level 1",
       level: null,
       size: null,
+      settings: JSON.parse(localStorage.getItem("settings")),
     };
+    this.musictheme = {
+      africa: africamusicfile,
+      asia: asiamusicfile,
+      japan: japanmusicfile,
+      forest: forestmusicfile,
+      water: watermusicfile,
+    }[this.state.settings.music.theme]
+  
+    this.audio = new Audio(this.musictheme)
+  
   }
 
+  
   onChangeNextLevel = () => {
     this.setState({
       ...this.state,
@@ -47,7 +65,16 @@ export default class GameScreen extends Component {
   // }
   componentDidMount(){
     initLocalStorage()
+    this.audio.volume = this.state.settings.music.enabled ? this.state.settings.music.volume / 100 : 0;
+    this.audio.loop=true;
+    this.audio.play()
   }
+  
+  componentWillUnmount(){
+    this.audio.pause();
+    this.audio.currentTime = 0;
+  }
+  
   render() {
     console.log(this.state.level, this.state.size);
     return (

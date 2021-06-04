@@ -5,7 +5,7 @@ export const initLocalStorage = () => {
   }
   if (localStorage.getItem("settings") === null) {
     const settings = {
-      music: { enabled: true, volume: 50 },
+      music: { enabled: true, volume: 50, theme: "asia" },
       sound: { enabled: true, volume: 50 },
     };
     localStorage.setItem("settings", JSON.stringify(settings));

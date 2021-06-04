@@ -18,7 +18,6 @@ ReactDOM.render(
   // <React.StrictMode>
     <Router>
       <Switch>
-        
         <Route exact path="/">
           <HomeScreen />
         </Route>

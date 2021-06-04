@@ -13,6 +13,7 @@ export default class GameBoard extends Component {
     super(props);
     const { size } = this.props;
     this.state = {
+      settings: JSON.parse(localStorage.getItem("settings")),
       squares: [...Array(size)].map(() => Array(size).fill(null)),
       fillModeOn: true,
       gameFinished: false,

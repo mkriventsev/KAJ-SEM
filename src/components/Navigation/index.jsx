@@ -14,6 +14,16 @@ export default class Navigation extends Component {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/game">
+                <div>New Game</div>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/statistics">
+                <div>Statistics</div>
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/settings">
                 <div>Settings</div>
               </Link>

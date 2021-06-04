@@ -5,6 +5,13 @@ import soundfile from '../../../../audio/effects/fireworks.mp3';
 
     
 export class FinishedGameModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      settings: JSON.parse(localStorage.getItem("settings")),
+    };
+  }
+  
   audio = new Audio(soundfile);
   handleClickNextLevel = () => {
     this.audio.pause();
@@ -23,6 +30,7 @@ export class FinishedGameModal extends Component {
   };
 
   playFireworkAudio(){
+    this.audio.volume = this.state.settings.sound.enabled? this.state.settings.sound.volume / 100 : 0;
     this.audio.currentTime = 0;
     this.audio.play();
   }
