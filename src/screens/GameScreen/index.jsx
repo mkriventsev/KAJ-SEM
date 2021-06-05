@@ -22,6 +22,7 @@ export default class GameScreen extends Component {
       size: null,
       settings: JSON.parse(localStorage.getItem("settings")),
     };
+    
     this.musictheme = {
       africa: africamusicfile,
       asia: asiamusicfile,
@@ -33,7 +34,6 @@ export default class GameScreen extends Component {
     this.audio = new Audio(this.musictheme)
   
   }
-
   
   onChangeNextLevel = () => {
     this.setState({

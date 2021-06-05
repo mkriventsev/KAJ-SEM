@@ -1,20 +1,20 @@
 Aplikace bude obsahovat několik stránek:
 
-Hlavni - stránka na které uživatel bude mít možnost začat novou hru, otevřít statistiku, změnit nastaveni aplikaci a poslat zpětnou vazbu.
-Nova hra - Po kliknutí uživatel zvolí obtížnost nonogramu (5x5, 10x10, 15x15) a otevře se stránka s nonogramem a začne se hra.
-Stránka s hrou - na stránce uživatel bude řešit nonogram. Taky se spočítá čas pro budoucí statistiky.
+[x] Hlavni - stránka na které uživatel bude mít možnost začit novou hru, otevřít statistiku, změnit nastaveni aplikaci a poslat zpětnou vazbu.
+[x] Nova hra - Po kliknutí uživatel zvolí obtížnost nonogramu (5x5, 10x10, 15x15) a otevře se stránka s nonogramem a začne se hra.
+[x] Stránka s hrou - na stránce uživatel bude řešit nonogram. Taky se spočítá čas pro budoucí statistiky.
 Statistika - na stránce bude zobrazena statistika každého vyneseného nonogramu. Statistika obsahuje počet pokusu a čas řešeni.
-Nastaveni - stránka obsahuje nastaveni aplikaci jako Ozvučení, Night mode(?), Reset score, a Navod pro uživatele.
+[x] Nastaveni - stránka obsahuje nastaveni aplikaci jako Ozvučení, Reset score, a Navod pro uživatele.
 Zpětná vazba - stránka obsahující formulář který umožňuje poslat email se zpětnou vazbou o aplikaci.
 
 
 Technologie:
 
-Single-page application + React.
-Local Storage pro statistiky,
+[x] Single-page application + React.
+[x] Local Storage pro statistiky,
 SVG/Canvas - pro vykresleni grafu statistiky,
 Service Worker pro offline mode,
-CSS animace a Audio pro lepši zdůrazněni interakce aplikace z uživatelem
+[x] CSS animace a Audio pro lepši zdůrazněni interakce aplikace z uživatelem
 
 
 Dokumentace             |Popis                              |Povinné        |Body
@@ -32,15 +32,15 @@ Validita                "Fungující v moderních prohlíčečích
                         v posledních vývojových verzích 
                         (Chrome, Firefox, Edge, Opera)"	                    2
 
-Semantické značky       "správné použití sémantických       X               1
+Semantické značky[x]       "správné použití sémantických       X               1
                         značek (section, article,
                         nav, aside, .)"
-nav section aside
+nav[x] section
 
 Grafika - SVG / Canvas                                                      2   
 анимация-хуяция
 
-Média - Audio/Video                                                         1
+Média - Audio/Video[x]                                                         1
 
 Formulářové prvky[x]    Validace[x], typy[x], placeholder[x], autofocus[x]  2
 

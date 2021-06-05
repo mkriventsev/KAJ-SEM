@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import GameScreen from './screens/GameScreen';
 import FeedbackScreen from './screens/FeedbackScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import StatisticsScreen from './screens/StatisticsScreen';
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +27,9 @@ ReactDOM.render(
         </Route>
         <Route path="/settings">
           <SettingsScreen />
+          </Route>
+        <Route path="/statistics">
+          <StatisticsScreen />
           </Route>
         <Route path="/feedback">
           <FeedbackScreen />
