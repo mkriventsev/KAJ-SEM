@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
+/** 
+* HomeScreen Component is used for rendering the main screen of application. It consists of the logo and navigation buttons
+*/
+
 export default class HomeScreen extends Component {
 
+  // onClick event on logo SVG that change the background of the tile by passing 'filled' class.
+
   onLogoTileClick(e){
-    console.log(e.target.id.slice(4,))
+
     // e.target.classList.toggle('filled')
     if (e.target.classList.contains('filled')){
       e.target.classList.remove('filled');
@@ -13,18 +19,18 @@ export default class HomeScreen extends Component {
     else{
       e.target.classList.add('filled');
     }
+
   }
+  // function that draws the logo as interactive nonogram game  using SVG
   drawLogoBoardSquares = () => {
     const scale = 20
-    // for scale - 40:
-    // const initTiles = ["00","01","02","03","11","22","33","33","32","31","30"]
     const initTiles = ["00","01","02","03","04","05","06","07",
     "11","12","13","14","15","16","17",
     "11","22","33","44","55","66","77",
     "12","23","34","45","56","67",
     "60","61","62","63","64","65","66","67",
     "70","71","72","73","74","75","76","77"]
-    // "00","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+
     const items = [];
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {

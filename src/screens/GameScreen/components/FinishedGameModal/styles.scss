@@ -10,22 +10,19 @@
     width: 30%;
 }
 .modalButton.btn-success{
-  -webkit-transition: -webkit-transform 0.5s;
-  transition: transform 0.5s;
-    &:hover{
-        // background-color: lighten($whitelogo, 10%);
-        transform: scale(1.1);
-    }
+  -webkit-transition: -webkit-transform .5s ease-in-out;
+  -moz-transition:    -moz-transform .5s ease-in-out;
+  -o-transition:      -o-transform .5s ease-in-out;
+  transition: -webkit-transform .5s ease-in-out;
+  transition: transform .5s ease-in-out;
+  &:hover{
+      // background-color: lighten($whitelogo, 10%);
+      transform: scale(1.1);
+  }
 }
 
-body {
-    margin: 0;
-    padding: 0;
-  /*   background: #000; */
-    // overflow: hidden;
-  }
-  
-  .pyro > .before, .pyro > .after {
+  .fireworks{
+  .after, .before {
     position: absolute;
     width: 5px;
     height: 5px;
@@ -37,19 +34,22 @@ body {
     -ms-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
     animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
   }
+}
   
-  .pyro > .after {
-    -moz-animation-delay: 1.25s, 1.25s, 1.25s;
-    -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
-    -o-animation-delay: 1.25s, 1.25s, 1.25s;
-    -ms-animation-delay: 1.25s, 1.25s, 1.25s;
-    animation-delay: 1.25s, 1.25s, 1.25s;
-    -moz-animation-duration: 1.25s, 1.25s, 6.25s;
-    -webkit-animation-duration: 1.25s, 1.25s, 6.25s;
-    -o-animation-duration: 1.25s, 1.25s, 6.25s;
-    -ms-animation-duration: 1.25s, 1.25s, 6.25s;
-    animation-duration: 1.25s, 1.25s, 6.25s;
+  .fireworks{
+    .after {
+    -moz-animation-delay: 2.0s, 2.0s, 2.0s;
+    -webkit-animation-delay: 2.0s, 2.0s, 2.0s;
+    -o-animation-delay: 2.0s, 2.0s, 2.0s;
+    -ms-animation-delay: 2.0s, 2.0s, 2.0s;
+    animation-delay: 2.0s, 2.0s, 2.0s;
+    -moz-animation-duration: 2.0s, 2.0s, 10.0s;
+    -webkit-animation-duration: 2.0s, 2.0s, 10.0s;
+    -o-animation-duration: 2.0s, 2.0s, 10.0s;
+    -ms-animation-duration: 2.0s, 2.0s, 10.0s;
+    animation-duration: 2.0s, 2.0s, 10.0s;
   }
+}
   
   @-webkit-keyframes bang {
     to {

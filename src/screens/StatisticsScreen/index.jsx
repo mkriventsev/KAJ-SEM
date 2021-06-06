@@ -7,7 +7,13 @@ import max from "lodash/max";
 import { formatSecondsToHumanTime } from "../../utils/timeformatter";
 import { DeleteStatModal } from "./DeleteStatModal";
 
-export default class FeedbackScreen extends Component {
+/**
+ * StatisticScreen component is used for rendering statistic table.
+ * Table has sections based on board size. Each section displays statistics for the levels.
+ * Statistics is storing in the LocalStorage. Table shows best time, worst time, average time, 
+ * and number of tries for each level. User can remove stored statistic by clicking on the button.
+ */
+export default class StatisticsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +27,6 @@ export default class FeedbackScreen extends Component {
     this.setState({isModalOpen: true });
   }
   deleteLevelStat =(size,level) =>{
-    console.log(size,level)
     const levelstat =  this.state.levelstat
     delete levelstat[`s${size}`][`l${level}`]
     localStorage.setItem("levelstat", JSON.stringify(levelstat));
@@ -33,7 +38,6 @@ export default class FeedbackScreen extends Component {
   };
   onClickDeleteHandler = (e) =>{
     this.setState({size:e.target.dataset.size,level:e.target.dataset.level})
-    console.log(this.state)
     this.openModal()
   }
   renderSizeStatistics = (size, value) => {
@@ -84,7 +88,7 @@ export default class FeedbackScreen extends Component {
           ))
         ) : (
           <tr className="table-active">
-            <td colSpan="5">
+            <td colSpan="6">
               You haven't solve any nonogram in size of {size.slice(1)}x
               {size.slice(1)}{" "}
             </td>

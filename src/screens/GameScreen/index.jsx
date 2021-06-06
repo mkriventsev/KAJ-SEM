@@ -4,7 +4,6 @@ import Navigation from "../../components/Navigation";
 import GameSettings from "./components/GameSettings";
 import GameBoard from "./components/GameBoard";
 import SettingsButtons from "./components/SettingsButtons";
-import { FinishedGameModal } from "./components/FinishedGameModal";
 import { initLocalStorage } from "../../utils/init";
 import africamusicfile from "../../audio/music/africa.mp3";
 import asiamusicfile from "../../audio/music/asia.mp3";
@@ -12,6 +11,12 @@ import japanmusicfile from "../../audio/music/japan.mp3";
 import forestmusicfile from "../../audio/music/forest.mp3";
 import watermusicfile from "../../audio/music/water.mp3";
 
+/**
+ * GameScreen is assuming, main game component which handles rendering the both stages of the game based on the this.state.displayBoardSettings state's variable
+ * GameSettings - first stage for setting the game
+ * GameBoardmusic - second stage with play board
+ * and also renders Navigation component
+ */
 export default class GameScreen extends Component {
   constructor(props) {
     super(props);
@@ -86,9 +91,6 @@ export default class GameScreen extends Component {
     });
   };
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextState.level !== this.state.level
-  // }
   componentDidMount() {
     initLocalStorage();
     this.playAudio();
@@ -136,7 +138,6 @@ export default class GameScreen extends Component {
     );
   };
   render() {
-    // console.log(this.state.level, this.state.size);
     return (
       <div>
         <Navigation onBackToSelectLevel={this.onBackToSelectLevel} />

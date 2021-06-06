@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./styles.scss";
 
+/**
+ * DeleteStatModal is using for render modal window asking before erasing statistics
+ */
     
 export class DeleteStatModal extends Component {
   constructor(props) {
@@ -14,6 +17,7 @@ export class DeleteStatModal extends Component {
     this.props.onCloseModal()
   }
 
+  // delete statistics function from local storage is received as callback property, which will be called.
   handleDeleteStat = (e) => {
     this.props.onDeleteLevelStat(this.props.size,this.props.level);
   };

@@ -3,8 +3,11 @@
 .start-game-button{
     background-color: $green;
     width: 100%;
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    -moz-transition:    -moz-transform .5s ease-in-out;
+    -o-transition:      -o-transform .5s ease-in-out;
+    transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
     &:hover{
         background-color: lighten($green, 10%);
         transform: scale(1.1);

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 
 import "./styles.scss";
 
+/**
+ * SettingsButtons component is used for rendering buttons that control music in the game. It allows user to mute background music
+ */
 export default class SettingsButtons extends Component {
   onChangeMusic = (e) =>{
     let value = e.target.checked
@@ -30,7 +33,7 @@ export default class SettingsButtons extends Component {
             MUSIC
           </label>
         </div>
-        <div id="sound-set">
+        {/* <div id="sound-set">
           <input
             id="sound-custom-checkbox-input"
             type="checkbox"
@@ -44,7 +47,7 @@ export default class SettingsButtons extends Component {
           >
             SOUND
           </label>
-        </div>
+        </div> */}
       </aside>
     );
   }

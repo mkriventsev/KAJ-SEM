@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./styles.scss";
-import logofile from "../../data/logo2.png"
+import logofile from "../../img/logo2.png"
 
+/**
+ * Navigation menu component
+ */
 export default class Navigation extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        {/* <div class="container-fluid"> */}
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">
         <img src={logofile}/>
               </Link>
@@ -42,7 +44,6 @@ export default class Navigation extends Component {
               </Link>
             </li>
           </ul>
-        {/* </div> */}
         </div>
       </nav>
     );

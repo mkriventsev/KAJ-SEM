@@ -7,8 +7,11 @@
     border: 2px solid #282828;
     border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
     background-color: #efefef;
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    -moz-transition:    -moz-transform .5s ease-in-out;
+    -o-transition:      -o-transform .5s ease-in-out;
+    transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
     &:hover{
         background-color: lighten($whitelogo, 10%);
         transform: scale(1.05);
@@ -20,11 +23,11 @@
         }
 }
 #sound-custom-checkbox-input:not(:checked)+label#sound-custom-checkbox::after {
-    content: url(../../../../data/volume-silent.svg);
+    content: url(../../../../img/volume-silent.svg);
 }
 
 // #start-over::after{
-//     content: url(../../../../data/repeat.svg);
+//     content: url(../../../../img/repeat.svg);
 // }
 
 #change-mode::after{
@@ -44,5 +47,5 @@
     
 }
 // #select-level::after{
-//     content: url(../../../../data/repeat.svg);
+//     content: url(../../../../img/repeat.svg);
 // }

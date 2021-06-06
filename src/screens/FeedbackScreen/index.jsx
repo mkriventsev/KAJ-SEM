@@ -1,7 +1,11 @@
+
 import React, { Component } from "react";
 import Navigation from "../../components/Navigation";
 import "./styles.scss";
 
+/**
+ * FeedbackScreen component is using for rendering feedback page, where user can fill the feedback form
+ */
 export default class FeedbackScreen extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +13,9 @@ export default class FeedbackScreen extends Component {
       feedbackSent: false,
     };
   }
-
+   /**
+ * Feedback HTML form
+ */
   renderFeedbackForm = (e) =>{
     return <form id = "feedback-form">
     <h4 className="card-title">Share your feedback</h4>
@@ -53,18 +59,28 @@ export default class FeedbackScreen extends Component {
     </form>
   }
   
+  /**
+ * clickOk is the function which turning on back feedback form by changing feedbackSent state
+ */
   clickOk = (e) => {
     this.setState({feedbackSent: false})
   }
+   /**
+ * renderFeedbackSent is the renderer for thank element after the Submit button was pressed 
+
+ */
   renderFeedbackSent = (e) => {
       return <div>
-          <p>Thank you!
+          <p>Thank you for your feedback. Press OK to display feedback form again!
           </p>
           <button onClick={this.clickOk}> OK </button>
       </div>
   }
+  /**
+ * sendEmail function collecting form imputs' values and generating mailto string for 
+ *  opening email client for sending a feedback email. Redirect works as changing windos.location.href addres to genereted new.
+ */
   sendEmail = (e) => {
-    console.log(e.target);
     if (e.target.parentNode.checkValidity()) {
       let body = `Hi, Max! ${escape("\r\n")}`;
       body += e.target.parentNode[2].value;
@@ -76,6 +92,10 @@ export default class FeedbackScreen extends Component {
       window.location.href = link;
       this.setState({feedbackSent: true})}
   };
+   /**
+ * main renderer of feedback page.
+ * Depends on feedbackSent value the different page is shown
+ */
   render() {
     return (
       <div>

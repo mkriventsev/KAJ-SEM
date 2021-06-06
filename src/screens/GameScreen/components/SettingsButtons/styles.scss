@@ -18,8 +18,11 @@ label.custom-checkbox {
     position: relative;
     cursor: pointer;
     z-index: 31;
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    -moz-transition:    -moz-transform .5s ease-in-out;
+    -o-transition:      -o-transform .5s ease-in-out;
+    transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
     &:hover{
         background-color: lighten($whitelogo, 10%);
         transform: scale(1.1);
@@ -39,17 +42,17 @@ label.custom-checkbox::after, label.custom-checkbox::after {
 }
 
 #sound-custom-checkbox-input:not(:checked)+label#sound-custom-checkbox::after {
-    content: url(../../../../data/volume-up.svg);
+    content: url(../../../../img/volume-up.svg);
 }
 
 #sound-custom-checkbox-input:checked+label#sound-custom-checkbox::after {
-    content: url(../../../../data/volume-silent.svg);
+    content: url(../../../../img/volume-silent.svg);
 }
 
 #music-custom-checkbox-input:not(:checked)+label#music-custom-checkbox::after {
-    content: url(../../../../data/music-silent.svg);
+    content: url(../../../../img/music-silent.svg);
 }
 
 #music-custom-checkbox-input:checked+label#music-custom-checkbox::after {
-    content: url(../../../../data/music-up.svg);
+    content: url(../../../../img/music-up.svg);
 }

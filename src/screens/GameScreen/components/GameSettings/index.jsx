@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { solver } from "../../../../data/solvers";
 import "./styles.scss";
 
+/**
+ * GameSettings component is using for choosing parametrs of a new game, such as board size and level and start a new game
+ */
+
 export default class GameSettings extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +41,6 @@ export default class GameSettings extends Component {
   }
 
   onSelectLevel = (e) => {
-    console.log(e.target.value)
     this.setState({ ...this.state, level: parseInt(e.target.value), levelName: 'Level ' + e.target.value });
   };
 
@@ -46,8 +49,6 @@ export default class GameSettings extends Component {
   };
 
   startGame = () => {
-    console.log(this.state.levelName, this.props);
-
     this.props.onChangeSettings(this.state);
   };
 

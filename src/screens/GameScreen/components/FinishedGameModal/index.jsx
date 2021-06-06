@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { formatSecondsToHumanTime } from "../../../../utils/timeformatter";
 import "./styles.scss";
 import soundfile from '../../../../audio/effects/fireworks.mp3'; 
-
+/**
+ * FinishedGameModal is using for render modal window after solving a level. 
+ */
     
 export class FinishedGameModal extends Component {
   constructor(props) {
@@ -11,8 +13,12 @@ export class FinishedGameModal extends Component {
       settings: JSON.parse(localStorage.getItem("settings")),
     };
   }
-  
+/**
+ * importing the audio file which plays onClick
+ */
+
   audio = new Audio(soundfile);
+   
   handleClickNextLevel = () => {
     this.audio.pause();
     this.props.onChangeLevel();
@@ -51,7 +57,7 @@ export class FinishedGameModal extends Component {
               <span>
                 Your time is {formatSecondsToHumanTime(this.props.solveTime)}
               </span>
-              <div className="pyro">
+              <div className="fireworks">
                 <div className="before"></div>
                 <div className="after"></div>
               </div>

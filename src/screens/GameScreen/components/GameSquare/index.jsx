@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./styles.scss";
 import soundfile from '../../../../audio/effects/click.mp3'; 
 
+/**
+ * GameSquare component is used to render and control the state(value) of the board square
+ */
 export default class GameSquare extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,7 @@ export default class GameSquare extends Component {
   componentDidMount(){
     this.audio.volume = this.state.settings.sound.enabled? this.state.settings.sound.volume / 100 : 0;
   }
+  // adding sounds effect on click
   clickHandle = () => {
     this.props.onClick();
     this.audio.play();

@@ -7,8 +7,19 @@ import { FinishedGameModal } from "../FinishedGameModal";
 import ButtonsLine from "../ButtonsLine";
 import Clock from "../../../../components/Clock";
 import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
-
+  /**
+ * GameBoard coomponen is using for render playing board
+ */
 export default class GameBoard extends Component {
+   /**
+ * component's state contains:
+ * - settings: read values from local Storage, there is an object with music/sound settings
+ * - squares: array representing filled squares on the board by user
+ * - fillModeOn: playing mode (guessing and filling )
+ * - isModalOpen: inidicated state of finish modal window
+ * - resetTime: using for reseting time in Clock componen
+ * - solveTime: init and stored value after solving the level.
+ */
   constructor(props) {
     super(props);
     const { size } = this.props;
@@ -26,9 +37,11 @@ export default class GameBoard extends Component {
   selectedSolver = null;
   solverCertificate = null;
   countsForSolver = null;
-
+ 
+  /**
+ * initiating of board. Loading level's solver with correct answer, 
+ */
   initBoard = () => {
-    console.log("init Board");
     this.selectedSolver = solver[`s${this.props.size}`][`l${this.props.level}`];
     this.solverCertificate = this.createCertificate(this.selectedSolver);
     let trSolver = this.selectedSolver[0].map((_, colIndex) =>
@@ -47,7 +60,6 @@ export default class GameBoard extends Component {
       resetTime: true,
       gameFinished: false,
     });
-    console.log("nazvanie" + this.selectedSolver);
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -56,11 +68,12 @@ export default class GameBoard extends Component {
         squares: [...Array(props.size)].map(() => Array(props.size).fill(null)),
       };
     }
-
     // Return null if the state hasn't changed
     return null;
   }
-
+/**
+ * function for saving solving time of level. Saving time in seconds in Local Storage
+ */
   saveSolveTime = (time) => {
     this.setState({ solveTime: time });
     let levelstat = JSON.parse(localStorage.getItem("levelstat"));
@@ -71,9 +84,11 @@ export default class GameBoard extends Component {
     }
 
     localStorage.setItem("levelstat", JSON.stringify(levelstat));
-    // users = JSON.parse(localStorage.getItem("users") || "[]");
   };
 
+/**
+ * function renderer of cells (GameSquare component) on the board grid using squares object from the component's state.
+ */
   renderSquares() {
     return this.state.squares.map((line, lineIndex) => (
       <div key={lineIndex + line} className="game-row">
@@ -89,6 +104,9 @@ export default class GameBoard extends Component {
     ));
   }
 
+  /**
+ * click handler for board. receiving row's and col's index of click. Depends on filling mode the different ways a cell will be filled
+ */
   handleClick(row, col) {
     const squares = this.state.squares.slice();
     if (!this.state.gameFinished) {
@@ -107,6 +125,9 @@ export default class GameBoard extends Component {
     }
   }
 
+/**
+ * Calculating of digits which saying user how many filled cells should be in each col/row. Just iterating iver the solver's object
+ */
   calculateSolverCounts(solver) {
     let rows = [];
     solver.forEach((row) => {
@@ -130,6 +151,10 @@ export default class GameBoard extends Component {
     return rows;
   }
 
+  /**
+ * Function for checking board's state. Comparing solver and squares objects' certificated.
+ * The puzzle is solved if certificates are the same
+ */
   checkSolver() {
     const board = this.state.squares;
     const boardCertificate = this.createCertificate(board);
@@ -139,6 +164,9 @@ export default class GameBoard extends Component {
     }
   }
 
+  /**
+ * Certificate here is string representation of whole array of array of squares object.
+ */
   createCertificate(array) {
     let certificate = "";
     array.forEach((i) => {
@@ -149,7 +177,6 @@ export default class GameBoard extends Component {
         certificate += j.toString();
       });
     });
-    console.log(certificate);
     return certificate;
   }
 
@@ -162,11 +189,14 @@ export default class GameBoard extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps, this.props, "hhhh");
     if (prevProps.level != this.props.level) {
       this.initBoard();
     }
   }
+
+  /**
+ * render function of Board, which importing FinishedGameModal, Clock, GameSolverNumbers and ButtonsLine components
+ */
   render() {
     console.log(this.selectedSolver, "render Game Board");
 

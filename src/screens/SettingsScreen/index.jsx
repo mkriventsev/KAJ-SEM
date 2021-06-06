@@ -5,6 +5,11 @@ import videofile from "../../video/video.mp4";
 import clicksound from "../../audio/effects/click.mp3";
 import { themes } from "../../data/music";
 import capitalize from "lodash/capitalize";
+/**
+ * SettingsScreen component is using for changing the game settings.
+ * Such as sound effects and music. User can set volume of the music and sound or turn off it.
+ * User can change the music theme. Also this component contains game instruction with the video.
+ */
 
 export default class SettingsScreen extends Component {
   constructor(props) {
@@ -162,10 +167,18 @@ export default class SettingsScreen extends Component {
           <section>
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Game Instruction</h4>
+                <h3 className="card-title">Game Instruction</h3>
                 <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                Nonogram is a picture logic puzzle in which cells in a grid must be colored or left blank according to numbers at the side of the grid to reveal a hidden picture.
+                </p>
+                <p className="card-text">
+                In this puzzle type, the numbers are a form of discrete tomography that measures how many unbroken lines of filled-in squares there are in any given row or column. For example, a clue of "4 8 3" would mean there are sets of four, eight, and three filled squares, in that order, with at least one blank square between successive sets.
+                </p>
+                <p className="card-text">
+                In this puzzle type, the numbers are a form of discrete tomography that measures how many unbroken lines of filled-in squares there are in any given row or column. For example, a clue of "4 8 3" would mean there are sets of four, eight, and three filled squares, in that order, with at least one blank square between successive sets.
+                </p>
+                <p className="card-text">
+                Below you can find short the video guide how to solve simple nonogram.
                 </p>
                 <video width="100%" controls>
                   <source src={videofile} type="video/mp4" />

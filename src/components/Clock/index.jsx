@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import ButtonsLine from "../../screens/GameScreen/components/ButtonsLine";
 import { formatSecondsToHumanTime } from "../../utils/timeformatter";
 
+/**
+ * Clock component is using for rendering and controling the stopwatch in the game.
+ */
+
 export default class Clock extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +56,7 @@ export default class Clock extends Component {
       this.stop();
       this.setState({isTimeSaved: true });
     }
-    if (this.props.resetTime) {
-      console.log("da");
+    if (this.props.resetTime) { 
       this.props.onStartOver();
       
       if (this.state.isTimeSaved){
