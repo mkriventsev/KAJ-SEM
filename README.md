@@ -97,15 +97,11 @@ NoNoGame is Single-page application developed using React framesork.
 
 For storing user preferences and statistics the Local Storage API was used
 
-Audio accompaniment
+Audio accompaniment - playing audion uding JS
 
-SVG/Canvas - pro vykresleni grafu statistiky,
+Interactive SVG logo on the main page
 
 Regitered default Service Worker used for making the app running in offline mode,
-
-
-[x] CSS animace a Audio pro lepši zdůrazněni interakce aplikace z uživatelem
-
 
 
 # How to run on localhost
