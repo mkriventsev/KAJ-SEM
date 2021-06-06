@@ -1,7 +1,7 @@
 # NoNo Game
 
 ## Abstract
-The main aim of this project is to create an application on the theme "NoNo Game" using modern web development approached based on JavaScript. Technologies  were used: HTML5, SCSS, Bootstrap theme, JS Framework React. The project is Single Page 
+The main aim of this project is to create an application on the theme "NoNo Game" using modern web development approached based on JavaScript. Technologies  were used: HTML5, SCSS, Bootstrap theme, JS Framework React.
 
 Application runs on Heroku cloud hosting. - https://mkriventsev-kaj-sem.herokuapp.com/
 
