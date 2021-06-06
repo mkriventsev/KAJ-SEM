@@ -3,14 +3,14 @@ import "./styles.scss";
 import Navigation from "../../components/Navigation";
 import GameSettings from "./components/GameSettings";
 import GameBoard from "./components/GameBoard";
+import SettingsButtons from "./components/SettingsButtons";
 import { FinishedGameModal } from "./components/FinishedGameModal";
 import { initLocalStorage } from "../../utils/init";
-import africamusicfile from '../../audio/music/africa.mp3'; 
-import asiamusicfile from '../../audio/music/asia.mp3'; 
-import japanmusicfile from '../../audio/music/japan.mp3'; 
-import forestmusicfile from '../../audio/music/forest.mp3'; 
-import watermusicfile from '../../audio/music/water.mp3'; 
-
+import africamusicfile from "../../audio/music/africa.mp3";
+import asiamusicfile from "../../audio/music/asia.mp3";
+import japanmusicfile from "../../audio/music/japan.mp3";
+import forestmusicfile from "../../audio/music/forest.mp3";
+import watermusicfile from "../../audio/music/water.mp3";
 
 export default class GameScreen extends Component {
   constructor(props) {
@@ -22,19 +22,45 @@ export default class GameScreen extends Component {
       size: null,
       settings: JSON.parse(localStorage.getItem("settings")),
     };
-    
+
     this.musictheme = {
       africa: africamusicfile,
       asia: asiamusicfile,
       japan: japanmusicfile,
       forest: forestmusicfile,
       water: watermusicfile,
-    }[this.state.settings.music.theme]
-  
-    this.audio = new Audio(this.musictheme)
-  
+    }[this.state.settings.music.theme];
+
+    this.audio = new Audio(this.musictheme);
   }
-  
+
+  onCLickOnMusic = (e) => {
+    this.setState(
+      {
+        settings: {
+          ...this.state.settings,
+          music: { ...this.state.settings.music, enabled: e.target.checked },
+        },
+      },
+      () => {
+        localStorage.setItem("settings", JSON.stringify(this.state.settings));
+      }
+    );
+  };
+  onCLickOnSound = (e) => {
+    this.setState(
+      {
+        settings: {
+          ...this.state.settings,
+          sound: { ...this.state.settings.sound, enabled: e.target.checked },
+        },
+      },
+      () => {
+        localStorage.setItem("settings", JSON.stringify(this.state.settings));
+      }
+    );
+  };
+
   onChangeNextLevel = () => {
     this.setState({
       ...this.state,
@@ -63,23 +89,62 @@ export default class GameScreen extends Component {
   // shouldComponentUpdate(nextProps, nextState) {
   //   return nextState.level !== this.state.level
   // }
-  componentDidMount(){
-    initLocalStorage()
-    this.audio.volume = this.state.settings.music.enabled ? this.state.settings.music.volume / 100 : 0;
-    this.audio.loop=true;
+  componentDidMount() {
+    initLocalStorage();
+    this.playAudio();
+  }
+  playAudio(){
+    this.audio.volume = this.state.settings.music.enabled
+      ? this.state.settings.music.volume / 100
+      : 0;
+    this.audio.loop = true;
     this.audio.play()
   }
-  
-  componentWillUnmount(){
+  stopAudio(){
     this.audio.pause();
     this.audio.currentTime = 0;
   }
+  componentWillUnmount() {
+    this.stopAudio()
+  }
+  switchMusic = (value) => {
+    this.setState(
+      {
+        settings: {
+          ...this.state.settings,
+          music: { ...this.state.settings.music, enabled: value },
+        },
+      },
+      () => {
+        localStorage.setItem("settings", JSON.stringify(this.state.settings));
+        value ? this.playAudio(): this.stopAudio()
+      }
+    );
+  };
+  switchSound = (value) => {
   
+    this.setState(
+      {
+        settings: {
+          ...this.state.settings,
+          sound: { ...this.state.settings.sound, enabled: value },
+        },
+      },
+      () => {
+        localStorage.setItem("settings", JSON.stringify(this.state.settings));
+      }
+    );
+  };
   render() {
-    console.log(this.state.level, this.state.size);
+    // console.log(this.state.level, this.state.size);
     return (
       <div>
-        <Navigation />
+        <Navigation onBackToSelectLevel={this.onBackToSelectLevel} />
+        <SettingsButtons
+          settings={this.state.settings}
+          onSwitchSound={this.switchSound}
+          onSwitchMusic={this.switchMusic}
+        />
         <div className="game-screen-container">
           <div className="game-container">
             {this.state.displayBoardSettings ? (

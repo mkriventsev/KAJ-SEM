@@ -51,17 +51,19 @@ export class FinishedGameModal extends Component {
               <span>
                 Your time is {formatSecondsToHumanTime(this.props.solveTime)}
               </span>
-              <div class="pyro">
-                <div class="before"></div>
-                <div class="after"></div>
+              <div className="pyro">
+                <div className="before"></div>
+                <div className="after"></div>
               </div>
             </div>
             <div className="modal-footer">
               {!this.props.isLastLevel ? (
-                <button
+                <button 
                   onClick={this.handleClickNextLevel}
                   type="button"
-                  className="btn btn-success"
+                  autoFocus
+                  tabindex="1"
+                  className="btn btn-success modalButton"
                 >
                   Next Level
                 </button>
@@ -69,15 +71,17 @@ export class FinishedGameModal extends Component {
                 <button
                   onClick={this.handleClickBackToSelectLevel}
                   type="button"
-                  className="btn btn-success"
+                  autoFocus
+                  tabindex="1"
+                  className="btn btn-success modalButton"
                 >
-                  SELECT LEVEL
+                  Select Level
                 </button>
               )}
               <button
                 onClick={this.handleCloseModal}
                 type="button"
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-secondary modalButton"
               >
                 Close
               </button>

@@ -97,7 +97,7 @@ export default class SettingsScreen extends Component {
         <Navigation />
         <div className="settings-container">
           <h1>Game Settings</h1>
-          <section>
+          <section class="musicSettings">
             <fieldset className="custom-control custom-switch">
               <input
                 type="checkbox"
@@ -110,6 +110,7 @@ export default class SettingsScreen extends Component {
                 Music
               </label>
             </fieldset>
+
             <fieldset className="form-group">
               <label>Music volume</label>
               <input
@@ -122,16 +123,18 @@ export default class SettingsScreen extends Component {
               />
             </fieldset>
             <fieldset className="form-group">
-            <label htmlFor="musicTheme">Select music theme</label>
-            <select
-              onChange={this.onSelectMusicTheme}
-              className="form-control"
-              id="musicTheme"
-              defaultValue = {this.state.settings.music.theme}
-            >
-              {this.renderMusicThemeSelector()}
-            </select>
+              <label htmlFor="musicTheme">Select music theme</label>
+              <select
+                onChange={this.onSelectMusicTheme}
+                className="form-control"
+                id="musicTheme"
+                defaultValue={this.state.settings.music.theme}
+              >
+                {this.renderMusicThemeSelector()}
+              </select>
             </fieldset>
+          </section>
+          <section class="soundSettings">
             <fieldset className="custom-control custom-switch">
               <input
                 type="checkbox"

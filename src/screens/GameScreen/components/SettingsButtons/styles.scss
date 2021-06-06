@@ -1,0 +1,55 @@
+@import '../../../../styles/colors.scss';
+
+.settings-buttons{
+    position:fixed;
+    top:20%;
+    margin: 50px;
+    // width: 100%;
+}
+label.custom-checkbox {
+    width: 100px;
+    height: 30px;
+    align-items: flex-start;
+    text-align: center;
+    border: 2px solid #282828;
+    border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+    background-color: #efefef;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    z-index: 31;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    &:hover{
+        background-color: lighten($whitelogo, 10%);
+        transform: scale(1.1);
+        font-size-adjust: 0.58;
+    }
+}
+
+label.custom-checkbox::after, label.custom-checkbox::after {
+    position: relative;
+    top:2.5px;
+    left: 5px;
+}
+
+#sound-custom-checkbox-input, #music-custom-checkbox-input{
+    position: absolute;
+    display: none;
+}
+
+#sound-custom-checkbox-input:not(:checked)+label#sound-custom-checkbox::after {
+    content: url(../../../../data/volume-up.svg);
+}
+
+#sound-custom-checkbox-input:checked+label#sound-custom-checkbox::after {
+    content: url(../../../../data/volume-silent.svg);
+}
+
+#music-custom-checkbox-input:not(:checked)+label#music-custom-checkbox::after {
+    content: url(../../../../data/music-silent.svg);
+}
+
+#music-custom-checkbox-input:checked+label#music-custom-checkbox::after {
+    content: url(../../../../data/music-up.svg);
+}

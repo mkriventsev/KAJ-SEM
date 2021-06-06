@@ -134,9 +134,8 @@ export default class GameBoard extends Component {
     const board = this.state.squares;
     const boardCertificate = this.createCertificate(board);
     if (boardCertificate === this.solverCertificate) {
-      console.log("KONEC, CHVATIT IGRAT");
+      console.log("KONEC, CHVATIT IHRAT");
       this.setState({ gameFinished: true, isModalOpen: true });
-      localStorage.setItem("myData", "data");
     }
   }
 
@@ -176,14 +175,12 @@ export default class GameBoard extends Component {
         <FinishedGameModal
           onChangeLevel={() => {
             this.props.onChangeNextLevel();
-            // this.initBoard();
           }}
           onCloseModal={this.onCloseModal}
           isOpen={this.state.isModalOpen}
           solveTime={this.state.solveTime}
           isLastLevel = {this.props.level === Object.keys(solver[`s${this.props.size}`]).length}
           onBackToSelectLevel={this.props.onBackToSelectLevel}
-
         />
         <Clock
           onStartOver={() => {

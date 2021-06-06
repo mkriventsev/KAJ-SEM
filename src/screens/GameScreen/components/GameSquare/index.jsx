@@ -5,7 +5,9 @@ import soundfile from '../../../../audio/effects/click.mp3';
 export default class GameSquare extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
+      // settings:this.props.settings
       settings: JSON.parse(localStorage.getItem("settings")),
     };
   }
